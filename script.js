@@ -1,3 +1,6 @@
+// Day 3: just building the visible structure - fetch logic stays as-is,
+// but we're not auto-running it anymore. Day 4 will connect it to the search button.
+
 const CITY = "London";
 
 async function fetchWeather(city) {
@@ -36,5 +39,47 @@ function parseWeatherData(rawData) {
   };
 }
 
-// Run it on page load so you can immediately check the console
-fetchWeather(CITY);
+// Grab references to the HTML elements we'll need to update
+const cityInput = document.getElementById("city-input");
+const searchButton = document.getElementById("search-button");
+const weatherCard = document.getElementById("weather-card");
+const messageEl = document.getElementById("message");
+
+const cityNameEl = document.getElementById("city-name");
+const temperatureEl = document.getElementById("temperature");
+const conditionEl = document.getElementById("condition");
+const humidityEl = document.getElementById("humidity");
+
+// Takes the clean weather object and puts it into the page
+function displayWeather(weatherData) {
+  cityNameEl.textContent = weatherData.city;
+  temperatureEl.textContent = `${weatherData.temperature}°C`;
+  conditionEl.textContent = weatherData.description;
+  humidityEl.textContent = `Humidity: ${weatherData.humidity}%`;
+
+  weatherCard.style.display = "block";
+  messageEl.textContent = "";
+}
+
+// Runs when the Search button is clicked
+async function handleSearch() {
+  const city = cityInput.value.trim();
+
+  if (city === "") {
+    messageEl.textContent = "Please enter a city name.";
+    weatherCard.style.display = "none";
+    return;
+  }
+
+  const weatherData = await fetchWeather(city);
+
+  if (weatherData) {
+    displayWeather(weatherData);
+  } else {
+    // fetchWeather already logged the real error - just show something to the user
+    messageEl.textContent = "Couldn't find that city. Try checking the spelling.";
+    weatherCard.style.display = "none";
+  }
+}
+
+searchButton.addEventListener("click", handleSearch);

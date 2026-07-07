@@ -5,12 +5,27 @@
   <title>Weather Dashboard</title>
 </head>
 <body>
-  <h1>Weather Dashboard (Day 1 - just testing the API)</h1>
-  <p>Open your browser console (F12) to see the API response.</p>
+  <h1>Weather Dashboard</h1>
+
+  <!-- Search area -->
+  <div id="search-area">
+    <input type="text" id="city-input" placeholder="Enter a city name" />
+    <button id="search-button">Search</button>
+  </div>
+
+  <!-- Weather card - stays hidden until we have data to show -->
+  <div id="weather-card" style="display: none;">
+    <h2 id="city-name"></h2>
+    <p id="temperature"></p>
+    <p id="condition"></p>
+    <p id="humidity"></p>
+  </div>
+
+  <!-- Message area for errors or loading states -->
+  <p id="message"></p>
 
   <!-- config.js holds the API key and is gitignored - see README -->
   <script src="config.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
-
