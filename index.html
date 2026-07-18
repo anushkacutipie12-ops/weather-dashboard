@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <title>Weather Dashboard</title>
-  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <h1>Weather Dashboard</h1>
 
-  <!-- Search area -->
   <div id="search-area">
     <input type="text" id="city-input" placeholder="Enter a city name" />
     <button id="search-button">Search</button>
   </div>
+
   <div id="weather-card" style="display: none;">
     <h2 id="city-name"></h2>
     <p id="temperature"></p>
@@ -20,7 +20,9 @@
     <p id="humidity"></p>
   </div>
 
-  <!-- Message area for errors or loading states -->
+  <!-- 5-day forecast cards will get added here by script.js -->
+  <div id="forecast-area"></div>
+
   <p id="message"></p>
 
   <script src="config.js"></script>
